@@ -1,13 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My DevOps Lab</title>
-    <link href="css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <h1>!Hello there!</h1>  
-    <h2>This was deployed with Docker and Ansible</h2>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Lab | Jaime Fraile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased">
+
+    <nav class="p-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-server text-blue-500 text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight">DevOps<span class="text-blue-500">Lab</span></span>
+            </div>
+            <a href="https://github.com/fraylope/DevOps-Lab" target="_blank" class="hover:text-blue-400 transition-colors">
+                <i class="fab fa-github text-2xl"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 py-20 flex flex-col items-center text-center">
+        <div class="inline-block px-4 py-1.5 mb-6 text-sm font-medium tracking-wide text-blue-400 uppercase bg-blue-400/10 rounded-full border border-blue-400/20">
+            Desplegado automáticamente
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            ¡Hola desde mi Lab DevOps! 👋
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mb-10">
+            Este entorno ha sido levantado utilizando <span class="text-blue-400 font-semibold">Docker</span> y configurado mediante <span class="text-red-500 font-semibold">Ansible</span>
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://github.com/fraylope/DevOps-Lab" target="_blank" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-lg font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-600/20">
+                Ver en GitHub
+            </a>
+            <div class="px-8 py-4 bg-slate-800 rounded-lg font-bold border border-slate-700">
+                Estado: <span class="text-green-400">¡En producción!</span>
+            </div>
+        </div>
+    </main>
+
+    <section class="max-w-5xl mx-auto px-6 py-20 border-t border-slate-800">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 bg-slate-800/50 rounded-2xl border border-slate-700 hover:border-blue-500/50 transition-colors">
+                <i class="fab fa-docker text-4xl text-blue-400 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Docker</h3>
+                <p class="text-slate-400">Contenerización ligera utilizando imágenes Alpine para máxima eficiencia.</p>
+            </div>
+            <div class="p-8 bg-slate-800/50 rounded-2xl border border-slate-700 hover:border-red-500/50 transition-colors">
+                <i class="fas fa-robot text-4xl text-red-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Ansible</h3>
+                <p class="text-slate-400">Automatización de la configuración del sistema host sin intervención manual.</p>
+            </div>
+            <div class="p-8 bg-slate-800/50 rounded-2xl border border-slate-700 hover:border-green-500/50 transition-colors">
+                <i class="fas fa-database text-4xl text-green-400 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">PostgreSQL</h3>
+                <p class="text-slate-400">Base de datos persistente integrada en la red interna del stack.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-slate-500 text-sm border-t border-slate-800">
+        <p>© 2026 Jaime Fraile López</p>
+    </footer>
+
+</body>
 </html>
