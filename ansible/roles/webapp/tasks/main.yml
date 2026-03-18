@@ -1,0 +1,11 @@
+---
+- name: Clonar el repo del proyecto desde Github
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ app_path }}"
+    force: yes
+
+- name: Desplegar el stack de contenedores con docker-compose
+  shell:
+    cmd: docker compose up -d
+    chdir: "{{ app_path }}"

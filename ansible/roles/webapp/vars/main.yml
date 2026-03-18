@@ -1,0 +1,2 @@
+app_path: "/home/{{ ansible_user }}/DevOps-Lab-App"
+repo_url: "https://github.com/fraylope/DevOps-Lab.git"

@@ -1,0 +1,14 @@
+---
+- name: Despliegue completo del laboratorio DevOps
+  hosts: all
+  become: yes # Para poder ejecutar como sudo
+
+  vars: # Variables para que el role de Docker funcione correctamente
+    docker_install_compose: true
+    docker_users:
+      - "{{ ansible_user_id }}" # Añadir el usuario al grupo de Docker automáticamente
+
+  roles:
+    - common
+    - geerlingguy.docker # Role de docker de la comunidad (funciona para múltiples distribuciones)
+    - webapp

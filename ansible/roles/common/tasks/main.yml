@@ -1,0 +1,10 @@
+---
+- name: Actualizar la caché de paquetes ( apt / yum )
+  package:
+    update_cache: yes
+
+- name: Instalar dependencias necesarias
+  package:
+    name:
+      - git
+    state: present
