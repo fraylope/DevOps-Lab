@@ -102,4 +102,4 @@ This:
 
 **Jaime Fraile López**  
 - SysAdmin & DevOps Engineer in progress 🚀  
-[LinkedIn](https://www.linkedin.com/jaime-fraile-lopez) | [GitHub](https://github.com/fraylope)
+[LinkedIn](https://www.linkedin.com/in/jaime-fraile-lopez) | [GitHub](https://github.com/fraylope)
