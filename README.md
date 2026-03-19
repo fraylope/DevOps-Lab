@@ -5,10 +5,10 @@ This serves as a practice environment for automated, containerized application d
 
 - Automation via **Ansible**
 - Containerization and local orchestration with **Docker & Docker‑Compose**
-- Despliegue reproducible de una **aplicación web estática + base de datos Postgres**
+- Reproducible deployment of a **static web application + Postgres database**
 - Modular infrastructura ready to scalate with **Terraform**
 
-El objetivo es demostrar un flujo real de despliegue E2E automatizado.
+The goal is to replicate a real E2E automated deployment workflow.
 
 ---
 
