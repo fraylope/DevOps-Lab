@@ -22,10 +22,13 @@ flowchart LR
     C --> E[PostgreSQL\nen contenedor]
     D --> F[App Web estática]
 ```
+
 ---
+
 ## 📦 Tech Stack
 
 ### 🔧 Automation — *Ansible*
+
 - Role **common**:
   - System upgrade
   - Dependencies installation
@@ -34,6 +37,7 @@ flowchart LR
   - Docker stack deployment via `docker-compose`
 
 ### 🐳 Containers — *Docker*
+
 - **Dockerfile** based on `nginx:alpine` for maximum efficiency
 - **docker-compose.yaml** with:
   - Service **web**
@@ -41,14 +45,15 @@ flowchart LR
   - Internal network (`devops-network`)
 
 ### 🌐 Web App
-- Modern HTML page using **TailwindCSS** 
+
+- Modern HTML page using **TailwindCSS**
 - Served by Nginx within a Docker container
 
 ---
 
 ## 📁 Project Structure
 
-```
+```bash
 ansible/  
 │ inventory/hosts.ini  
 │ ansible.cfg  
@@ -67,26 +72,33 @@ docker/
 │   ├── index.html  
 └── docker-compose.yaml  
 ```
+
 ---
 
 ## ▶️ Deploy execution
 
 ### 1. Access hosts
+
 Default inventory ( modify as needed):
-```
+
+```bash
 [webserver]
 localhost:2224
 ```
+
 ### 2. Launch Ansible playbook
 
 ```bash
 ansible-playbook ansible/site.yml
 ```
+
 This:
+
 1. Upgrades system
 2. Dependency installation
 3. Clones repository
 4. Deploy the containers via Docker-Compose
+
 ---
 
 ## 🛠 Improvements roadmap
@@ -97,9 +109,9 @@ This:
 - Move sensitive variables to a .env file
 - Add monitoring (Prometheus + Grafana)
 
-
 ## 👤 Author
 
 **Jaime Fraile López**  
+
 - SysAdmin & DevOps Engineer in progress 🚀  
 [LinkedIn](https://www.linkedin.com/in/jaime-fraile-lopez) | [GitHub](https://github.com/fraylope)
