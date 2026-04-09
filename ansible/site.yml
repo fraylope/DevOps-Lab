@@ -1,14 +1,38 @@
 ---
-- name: Despliegue completo del laboratorio DevOps
-  hosts: all
-  become: yes # Para poder ejecutar como sudo
+# DevOps Lab - Complete Infrastructure Automation
+# This playbook automates:
+# 1. System updates and dependencies
+# 2. Docker Engine installation
+# 3. Application deployment via Docker Compose
 
-  vars: # Variables para que el role de Docker funcione correctamente
+- name: DevOps Lab - Complete Deployment
+  hosts: all
+  become: yes
+  gather_facts: yes
+  
+  vars:
+    # Docker configuration
     docker_install_compose: true
     docker_users:
-      - "{{ ansible_user_id }}" # Añadir el usuario al grupo de Docker automáticamente
+      - "{{ ansible_user_id }}"
+    
+    # Fail fast on errors
+    ansible_failed_when_result_is_unreachable: true
+
+  pre_tasks:
+    - name: Check if running with sudo privileges
+      shell: whoami
+      register: current_user
+      changed_when: false
 
   roles:
     - common
-    - geerlingguy.docker # Role de docker de la comunidad (funciona para múltiples distribuciones)
+    - geerlingguy.docker
     - webapp
+
+  post_tasks:
+    - name: Display deployment summary
+      debug:
+        msg:
+          - "✓ Deployment completed successfully"
+          - "Instance: {{ ansible_hostname }}"

@@ -8,4 +8,4 @@
 - name: Desplegar el stack de contenedores con docker-compose
   shell:
     cmd: docker compose up -d
-    chdir: "{{ app_path }}"
+    chdir: "{{ app_path }}/docker"
