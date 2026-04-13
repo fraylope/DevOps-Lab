@@ -1,12 +1,17 @@
 
 # 🚀 DevOps Lab – Automated Infrastructure & Web Deployment
 
-This serves as a practice environment for automated, containerized application deployment.
+![CI Pipeline](https://github.com/fraylope/DevOps-Lab/actions/workflows/ci.yml/badge.svg)
 
-- Automation via **Ansible**
-- Containerization and local orchestration with **Docker & Docker‑Compose**
-- Reproducible deployment of a **static web application + Postgres database**
-- Modular infrastructura ready to scalate with **Terraform**
+This serves as a hands-on practice DevOps environment.
+
+## What this project covers
+
+- **CI/CD** — GitHub Actions pipeline: lint → build → push to GHCR
+- **Containerization** — Multi-stage Docker build, Docker Compose with health checks
+- **Automation** — Ansible roles for provisioning and deployment
+- **API** — Flask REST API connected to PostgreSQL
+- **Infrastructure as Code** — Terraform *(coming in next iteration)*
 
 The goal is to replicate a real E2E automated deployment workflow.
 
@@ -16,98 +21,102 @@ The goal is to replicate a real E2E automated deployment workflow.
 
 ```mermaid
 flowchart LR
-    A[Host Linux] --> B[Ansible Roles]
-    B --> C[Docker Engine]
-    C --> D[Nginx\nen contenedor]
-    C --> E[PostgreSQL\nen contenedor]
-    D --> F[App Web estática]
+    A[Developer\npush to main] --> B[GitHub Actions]
+    B --> C{Lint & Validate}
+    C -->|pass| D[Build Docker Image]
+    D --> E[Push to GHCR]
+    E --> F[Ansible Deploy]
+    F --> G[Docker Compose]
+    G --> H[Flask API\n:5000]
+    G --> I[PostgreSQL\ninternal]
+    H --> I
 ```
 
 ---
 
 ## 📦 Tech Stack
 
-### 🔧 Automation — *Ansible*
+| Layer | Technology |
+|---|---|
+| CI/CD | GitHub Actions |
+| Container Registry | GitHub Container Registry (GHCR) |
+| Containerization | Docker, Docker Compose |
+| API | Python, Flask |
+| Database | PostgreSQL 16 |
+| Automation | Ansible |
+| IaC | Terraform *(planned)* |
 
-- Role **common**:
-  - System upgrade
-  - Dependencies installation
-- Role **webapp**:
-  - Clones the repository
-  - Docker stack deployment via `docker-compose`
+---
 
-### 🐳 Containers — *Docker*
+## API Endpoints
 
-- **Dockerfile** based on `nginx:alpine` for maximum efficiency
-- **docker-compose.yaml** with:
-  - Service **web**
-  - Service **db** (PostgreSQL)
-  - Internal network (`devops-network`)
-
-### 🌐 Web App
-
-- Modern HTML page using **TailwindCSS**
-- Served by Nginx within a Docker container
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Web UI |
+| GET | `/health` | Health check |
+| GET | `/items` | List all items |
+| GET | `/items/<id>` | Get item by ID |
 
 ---
 
 ## 📁 Project Structure
 
 ```bash
-ansible/  
-│ inventory/hosts.ini  
-│ ansible.cfg  
-│ site.yml  
-│  
-└── roles/  
-     ├── common/  
-     │    └── tasks/main.yml  
-     └── webapp/  
-          ├── tasks/main.yml  
-          └── vars/main.yml  
-
-docker/  
-├── app/  
-│   ├── Dockerfile  
-│   ├── index.html  
-└── docker-compose.yaml  
+.github/
+└── workflows/
+└── ci.yml              # CI/CD pipeline
+ansible/
+├── inventory/
+│   └── hosts.ini
+├── roles/
+│   ├── common/             # System setup
+│   └── webapp/             # App deployment
+├── requirements.yml
+└── site.yml
+docker/
+├── app/
+│   ├── Dockerfile          # Multi-stage build
+│   ├── main.py             # Flask API
+│   └── requirements.txt
+├── docker-compose.yaml
+└── .env.example            # Copy to .env and fill values
 ```
 
 ---
 
-## ▶️ Deploy execution
-
-### 1. Access hosts
-
-Default inventory ( modify as needed):
+## Run locally
 
 ```bash
-[webserver]
-localhost:2224
+# 1. Clone
+git clone https://github.com/fraylope/DevOps-Lab.git
+cd DevOps-Lab
+
+# 2. Configure environment
+cp docker/.env.example docker/.env
+# Edit docker/.env with your values
+
+# 3. Start
+cd docker
+docker compose up --build
+
+# 4. Test
+curl http://localhost:5000/health
+curl http://localhost:5000/items
 ```
-
-### 2. Launch Ansible playbook
-
-```bash
-ansible-playbook ansible/site.yml
-```
-
-This:
-
-1. Upgrades system
-2. Dependency installation
-3. Clones repository
-4. Deploy the containers via Docker-Compose
 
 ---
 
 ## 🛠 Improvements roadmap
 
-- Add Terraform to automatically create the host
-- Integrate GitHub Actions (CI/CD → linting, testing, building, deploying)
-- Implement health checks on the containers
-- Move sensitive variables to a .env file
-- Add monitoring (Prometheus + Grafana)
+- [x] Flask API + PostgreSQL
+- [x] Docker multi-stage build with health checks
+- [x] GitHub Actions CI pipeline (lint + GHCR push)
+- [ ] Terraform — provision cloud VM
+- [ ] Ansible deploy to real remote server
+- [ ] Nginx frontend
+- [ ] Monitoring — Prometheus + Grafana
+
+---
 
 ## 👤 Author
 
